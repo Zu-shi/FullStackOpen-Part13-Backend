@@ -36,7 +36,7 @@ router.delete('/api/blogs/:id', async (req, res) => {
 
 router.put('/api/blogs/:id', async (req, res) => {
   if (req.blog) {
-    //note.important = req.body.important
+    note.likes = req.body.likes
     await req.blog.save()
     res.json(req.blog)
   } else {
