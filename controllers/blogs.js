@@ -1,16 +1,18 @@
 const router = require('express').Router()
+const tokenExtractor = require('../util/tokenExtractor')
 
-const { Blog } = require('../models')
+const { Blog, User } = require('../models')
 
 router.get('/', async (req, res) => {
   const blogs = await Blog.findAll()
   res.json(blogs)
 })
 
-router.post('/', async (req, res, next) => {
+router.post('/', tokenExtractor, async (req, res, next) => {
   console.log(req.body)
   try {
-    const blog = await Blog.create(req.body) // note that it saves automatically!
+    const user = await User.findByPk(req.decodedToken.id)
+    const blog = await Blog.create({ ...req.body, userId: user.id, date: new Date() })
     res.json(blog)
   } catch (error) {
     next(error)
@@ -22,10 +24,18 @@ const BlogFinder = async (req, res, next) => {
   next()
 }
 
-router.delete('/:id', BlogFinder, async (req, res) => {
+router.delete('/:id', tokenExtractor, BlogFinder, async (req, res, next) => {
+  req.blog = await Blog.findByPk(req.params.id)
   if (req.blog) {
-    //await Blog.destroy({ where: { id: req.params.id } }) // note that it saves automatically!
-    await req.blog.destroy()
+    if (!req.decodedToken || req.blog.userId != req.decodedToken.id) {
+      console.log(req.blog.userId, ", ", req.decodedToken.id)
+      next({ ErrorMessage: "token verification failed." })
+      res.status(404).end()
+      return;
+    }
+
+    await Blog.destroy({ where: { id: req.params.id } }) // note that it saves automatically!
+    // await req.blog.destroy()
     console.log("deleted")
     res.json(req.blog)
   } else {
