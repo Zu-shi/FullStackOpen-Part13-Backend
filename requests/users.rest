@@ -1,0 +1,29 @@
+GET http://localhost:3001/api/users 
+
+###
+GET http://localhost:3001/api/users/4
+
+###
+POST http://localhost:3001/api/users HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "Zu",
+  "username": "Zu"
+} 
+
+###
+POST http://localhost:3001/api/users HTTP/1.1
+Content-Type: application/json
+
+{
+  "username": "Error"
+} 
+
+### TODO: change username
+PUT http://localhost:3001/api/users/4 HTTP/1.1
+Content-Type: application/json
+
+{
+  "username": "NotError"
+} 
