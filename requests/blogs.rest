@@ -1,3 +1,6 @@
+GET http://localhost:3001/api/authors
+
+###
 GET http://localhost:3001/api/blogs 
 
 ###
