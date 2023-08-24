@@ -1,6 +1,4 @@
-const { Model, DataTypes } = require('sequelize')
-const { sequelize } = require('../util/db')
-
+const { DataTypes } = require('sequelize')
 
 module.exports = {
   up: async ({ context: queryInterface }) => {
@@ -25,8 +23,8 @@ module.exports = {
         type: DataTypes.INTEGER,
         defaultValue: 0
       },
-      createdAt: DataTypes.DATE,
-      updatedAt: DataTypes.DATE,
+      created_at: DataTypes.DATE,
+      updated_at: DataTypes.DATE,
     })
     await queryInterface.createTable('users', {
       id: {
@@ -46,8 +44,8 @@ module.exports = {
         type: DataTypes.STRING,
         allowNull: false
       },
-      createdAt: DataTypes.DATE,
-      updatedAt: DataTypes.DATE,
+      created_at: DataTypes.DATE,
+      updated_at: DataTypes.DATE,
     })
     // Note: no sequealize here!
     await queryInterface.addColumn('blogs', 'user_id', {

@@ -42,7 +42,7 @@ router.post('/', tokenExtractor, async (req, res, next) => {
   console.log(req.body)
   try {
     const user = await User.findByPk(req.decodedToken.id)
-    const blog = await Blog.create({ ...req.body, userId: user.id, date: new Date() })
+    const blog = await Blog.create({ ...req.body, userId: user.id, updatedAt: new Date() })
     res.json(blog)
   } catch (error) {
     next(error)
@@ -98,7 +98,8 @@ router.get('/:id', BlogFinder, async (req, res) => {
 
 const errorHandler = (error, request, response, next) => {
   console.log("error handler evoked")
-  console.error(error)
+  console.error(error.message)
+  response.status(400).send(error.message).end()
 
   next(error)
 }
