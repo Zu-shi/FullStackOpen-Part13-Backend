@@ -58,7 +58,7 @@ router.get('/:id', BlogFinder, async (req, res) => {
 
 const errorHandler = (error, request, response, next) => {
   console.log("error handler evoked")
-  console.error(error.message)
+  console.error(error)
 
   next(error)
 }

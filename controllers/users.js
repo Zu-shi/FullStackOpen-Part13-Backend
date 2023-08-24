@@ -29,9 +29,10 @@ router.post('/', async (req, res, next) => {
   } catch (error) { next(error) }
 })
 
-const errorHandler = (error, request, response, enxt) => {
+const errorHandler = (error, req, res, next) => {
   console.log("user error handler evoked")
   console.error(error.message)
+  res.send({ message: error.message })
 
   next(error)
 }
