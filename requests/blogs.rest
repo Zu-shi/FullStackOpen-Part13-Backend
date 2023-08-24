@@ -1,6 +1,9 @@
 GET http://localhost:3001/api/blogs 
 
 ###
+GET http://localhost:3001/api/blogs?search=postgressql
+
+###
 GET http://localhost:3001/api/blogs/4
 
 
@@ -12,7 +15,40 @@ Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ilp1I
 {
   "author": "Zu",
   "url": "www",
-  "title": "PostgreSQL"
+  "title": "PostgresSQL"
+} 
+
+###
+POST http://localhost:3001/api/blogs HTTP/1.1
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ilp1IiwiaWQiOjEsImlhdCI6MTY5Mjg2MTc5MX0.SgCMXJcrm1sC_D4KGIn07V05Y9Nn3YhSeBr189lMU0A
+
+{
+  "author": "Zu",
+  "url": "www",
+  "title": "test postgressql test"
+} 
+
+###
+POST http://localhost:3001/api/blogs HTTP/1.1
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ilp1IiwiaWQiOjEsImlhdCI6MTY5Mjg2MTc5MX0.SgCMXJcrm1sC_D4KGIn07V05Y9Nn3YhSeBr189lMU0A
+
+{
+  "author": "Zu",
+  "url": "www",
+  "title": "test Postgres test"
+} 
+
+###
+POST http://localhost:3001/api/blogs HTTP/1.1
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ilp1IiwiaWQiOjEsImlhdCI6MTY5Mjg2MTc5MX0.SgCMXJcrm1sC_D4KGIn07V05Y9Nn3YhSeBr189lMU0A
+
+{
+  "author": "Database Guru",
+  "url": "www.postgressql.com",
+  "title": "Using iLike"
 } 
 
 ###
