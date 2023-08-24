@@ -64,7 +64,15 @@ PUT http://localhost:3001/api/blogs/4 HTTP/1.1
 Content-Type: application/json
 
 {
-  "like": "Zu"
+  "likes": "Zu"
+} 
+
+###
+PUT http://localhost:3001/api/blogs/10 HTTP/1.1
+Content-Type: application/json
+
+{
+  "likes": "12"
 } 
 
 ###

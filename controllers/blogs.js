@@ -30,7 +30,10 @@ router.get('/', async (req, res) => {
     include: {
       model: User
     },
-    where: conditions
+    where: conditions,
+    order: [
+      ['likes', 'DESC']
+    ]
   })
   res.json(blogs)
 })
@@ -72,7 +75,7 @@ router.delete('/:id', tokenExtractor, BlogFinder, async (req, res, next) => {
 
 router.put('/:id', BlogFinder, async (req, res, next) => {
   if (req.blog) {
-    blog.likes = req.body.likes
+    req.blog.likes = req.body.likes
     try {
       await req.blog.save()
       res.json(req.blog)
