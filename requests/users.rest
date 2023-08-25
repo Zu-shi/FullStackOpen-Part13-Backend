@@ -1,7 +1,7 @@
 GET http://localhost:3001/api/users 
 
 ###
-GET http://localhost:3001/api/users/4
+GET http://localhost:3001/api/users/1
 
 ###
 POST http://localhost:3001/api/users HTTP/1.1
@@ -10,6 +10,15 @@ Content-Type: application/json
 {
   "name": "Zu",
   "username": "abc@def.com"
+} 
+
+###
+POST http://localhost:3001/api/users HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "Zu2",
+  "username": "abc2@def.com"
 } 
 
 ###
