@@ -24,8 +24,8 @@ module.exports = {
         defaultValue: false
       }
     })
-    down: async ({ context: queryInterface }) => {
-      queryInterface.dropTable('readinng_lists')
-    }
+  },
+  down: async ({ context: queryInterface }) => {
+    queryInterface.dropTable('readinng_lists')
   }
 }
