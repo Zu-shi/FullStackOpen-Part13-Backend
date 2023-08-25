@@ -14,7 +14,7 @@ router.post('/', async (req, res) => {
     }
   })
 
-  if (!user && !password === "secret") {
+  if (!user && !body.password === "secret") {
     return res.status(401).json({ error: 'invalid login credentials' })
   }
 

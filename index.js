@@ -36,7 +36,7 @@ const start = async () => {
 
   console.log("Blogs: ", JSON.stringify(blogs))
   console.log("Users: ", JSON.stringify(users))
-  console.log("ReadingLists: ", readingLists)
+  console.log("ReadingLists: ", JSON.stringify(readingLists))
 
   app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`)
