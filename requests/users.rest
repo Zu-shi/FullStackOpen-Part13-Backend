@@ -4,6 +4,12 @@ GET http://localhost:3001/api/users
 GET http://localhost:3001/api/users/1
 
 ###
+GET http://localhost:3001/api/users/1?isRead=false
+
+###
+GET http://localhost:3001/api/users/1?isRead=true
+
+###
 POST http://localhost:3001/api/users HTTP/1.1
 Content-Type: application/json
 

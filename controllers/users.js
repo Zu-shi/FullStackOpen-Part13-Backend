@@ -1,5 +1,5 @@
 const router = require('express').Router()
-
+const { Op } = require('sequelize')
 const { User, Blog, ReadingList } = require('../models')
 
 router.get('/', async (req, res, next) => {
@@ -22,6 +22,16 @@ router.get('/', async (req, res, next) => {
 })
 
 router.get('/:id', async (req, res, next) => {
+  // Wait what format is this???
+  let isRead = {
+    [Op.in]: [true, false]
+  }
+
+  if (req.query.isRead) {
+    console.log("Set query for isRead to ", isRead)
+    isRead = req.query.isRead === "true"
+  }
+
   const result = await User.findAll(
     {
       where: { id: req.params.id },
@@ -34,6 +44,7 @@ router.get('/:id', async (req, res, next) => {
             as: 'users_bookmarked',
             attributes: ['name'],
             through: {
+              where: { isRead },
               attributes: ['userId', 'isRead']
             },
           }
