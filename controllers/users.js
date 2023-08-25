@@ -65,6 +65,28 @@ router.put('/:username', async (req, res, next) => {
   } catch (error) { next(error) }
 })
 
+router.put('/disable/:id', async (req, res, next) => {
+  const user = await User.findByPk(
+    req.params.id
+  )
+  try {
+    user.disabled = true
+    await user.save()
+    res.json(user)
+  } catch (error) { next(error) }
+})
+
+router.put('/enable/:id', async (req, res, next) => {
+  const user = await User.findByPk(
+    req.params.id
+  )
+  try {
+    user.disabled = false
+    await user.save()
+    res.json(user)
+  } catch (error) { next(error) }
+})
+
 router.post('/', async (req, res, next) => {
   const user = new User(req.body)
   try {

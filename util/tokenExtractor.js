@@ -1,7 +1,8 @@
 const { SECRET } = require('./config.js')
 const jwt = require('jsonwebtoken')
+const { User } = require('../models/index.js')
 
-const tokenExtractor = (req, res, next) => {
+const tokenExtractor = async (req, res, next) => {
   const authorization = req.get('authorization')
   if (authorization && authorization.toLowerCase().startsWith('bearer ')) {
     try {
@@ -13,6 +14,14 @@ const tokenExtractor = (req, res, next) => {
       }
       else {
         req.decodedToken = jwt.verify(authorization.substring(7), SECRET)
+        const user = await User.findByPk(req.decodedToken.id)
+        if (user.disabled) {
+          return res.status(401).json({ error: 'user is disabled' })
+        }
+
+        if (user.token != authorization.substring(7)) {
+          return res.status(401).json({ error: 'token is invalid' })
+        }
       }
     } catch (error) {
       console.log(error)
