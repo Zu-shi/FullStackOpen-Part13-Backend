@@ -22,7 +22,11 @@ router.put('/:id', tokenExtractor, async (req, res, next) => {
   try {
     const read = await ReadingList.findByPk(req.params.id)
     read.isRead = req.body.isRead
-    await read.save()
+    if (req.user === read.userId) {
+      await read.save()
+    } else {
+      res.status(400).json({ error: "user does not have edit permission for this reading item" })
+    }
     res.json(req.user)
   }
   catch (error) {
